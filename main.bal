@@ -7,10 +7,16 @@ configurable string REFRESH_URL = ?;
 configurable string REFRESH_TOKEN = ?;
 
 ###################################################################################
-# Get files
+# Delete file by ID
+###################################################################################
+# Permanently deletes a file owned by the user without moving it to the trash. 
+# If the file belongs to a shared drive the user must be an organizer on the parent. 
+# If the target is a folder, all descendants owned by the user are also deleted.
 # ################################################################################
-# More details : https://developers.google.com/drive/api/v3/reference/files/get
+# More details : https://developers.google.com/drive/api/v3/reference/files/delete
 # #################################################################################
+
+configurable string fileId = "1qlLs1eoaQDFwPSba-ddjsKdgzyUHwzZk";
 
 public function main() {
 
@@ -25,18 +31,19 @@ public function main() {
 
     drive:Client driveClient = new (config);
 
-    drive:ListFilesOptional optional_search = {
-        pageSize : 3
+    drive:DeleteFileOptional delete_optional = {
+        supportsAllDrives : false
     };
-    
-    stream<drive:File>|error res = driveClient->getFiles(optional_search);
-    if (res is stream<drive:File>){
-        error? e = res.forEach(function (drive:File file) {
-            json|error jsonObject = file.cloneWithType(json);
-            if (jsonObject is json) {
-                log:print(jsonObject.toString());
-            }
-        });
+
+    //Do not supply a request body with this method.
+    //If successful, this method returns an empty response body.
+
+    boolean|error res = driveClient->deleteFileById(fileId, delete_optional);
+
+    if(res is boolean){
+        log:print("File Deleted");
+    } else {
+        log:printError(res.message());
     }
 
 }
