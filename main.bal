@@ -1,49 +1,54 @@
-import ballerina/log;
-import nuwantissera/googleapis_drive as drive;
+// import ballerina/log;
+// import nuwantissera/googleapis_drive as drive;
 
-configurable string CLIENT_ID = ?;
-configurable string CLIENT_SECRET = ?;
-configurable string REFRESH_URL = ?;
-configurable string REFRESH_TOKEN = ?;
+// configurable string CLIENT_ID = ?;
+// configurable string CLIENT_SECRET = ?;
+// configurable string REFRESH_URL = ?;
+// configurable string REFRESH_TOKEN = ?;
 
-###################################################################################
-# Delete file by ID
-###################################################################################
-# Permanently deletes a file owned by the user without moving it to the trash. 
-# If the file belongs to a shared drive the user must be an organizer on the parent. 
-# If the target is a folder, all descendants owned by the user are also deleted.
-# ################################################################################
-# More details : https://developers.google.com/drive/api/v3/reference/files/delete
-# #################################################################################
+// ###################################################################################
+// # Create file 
+// ###################################################################################
+// # Creates a new file
+// # Specify the file Name inside the payload. Else it will be uploaded as Untitled 
+// # file.
+// # Specify the mime type also.
+// # More details : https://developers.google.com/drive/api/v3/mime-types
+// # ################################################################################
+// # More details : https://developers.google.com/drive/api/v3/reference/files/create
+// # #################################################################################
 
-configurable string fileId = "1qlLs1eoaQDFwPSba-ddjsKdgzyUHwzZk";
 
-public function main() {
+// public function main() {
 
-    drive:Configuration config = {
-        clientConfig: {
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
-            refreshUrl: REFRESH_URL,
-            refreshToken: REFRESH_TOKEN
-        }
-    };
+//     drive:Configuration config = {
+//         clientConfig: {
+//             clientId: CLIENT_ID,
+//             clientSecret: CLIENT_SECRET,
+//             refreshUrl: REFRESH_URL,
+//             refreshToken: REFRESH_TOKEN
+//         }
+//     };
 
-    drive:Client driveClient = new (config);
+//     drive:Client driveClient = new (config);
 
-    drive:DeleteFileOptional delete_optional = {
-        supportsAllDrives : false
-    };
+//     drive:CreateFileOptional optionals = {
+//         ignoreDefaultVisibility : false
+//     };
 
-    //Do not supply a request body with this method.
-    //If successful, this method returns an empty response body.
+//     drive:File payload = {
+//         mimeType : "application/vnd.google-apps.file", 
+//         name : "fileintheroot.txt"
+//     };
 
-    boolean|error res = driveClient->deleteFileById(fileId, delete_optional);
+//     drive:File|error res = driveClient->createMetaDataFile(optionals, payload);
 
-    if(res is boolean){
-        log:print("File Deleted");
-    } else {
-        log:printError(res.message());
-    }
-
-}
+//     //Print file ID
+//     if(res is drive:File){
+//         string id = res?.id.toString();
+//         log:print(id);
+//     } else {
+//         log:printError(res.message());
+//     }
+    
+// }
