@@ -1,0 +1,10 @@
+[2021-03-01 13:43:03,573] SEVERE {b7a.log.crash} - nuwantissera/module_ballerinax_googleapis_drive/0_1_0/$ConfigurationMapper 
+java.lang.NoClassDefFoundError: nuwantissera/module_ballerinax_googleapis_drive/0_1_0/$ConfigurationMapper
+	at nuwant.GdriveSamples.0_1_0.$ConfigurationMapper.$configureInit(Unknown Source)
+	at nuwant.GdriveSamples.0_1_0.$_init.main(GdriveSamples)
+Caused by: java.lang.ClassNotFoundException: nuwantissera.module_ballerinax_googleapis_drive.0_1_0.$ConfigurationMapper
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	... 2 more
+ 
